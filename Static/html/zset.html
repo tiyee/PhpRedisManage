@@ -1,0 +1,130 @@
+ <div class="email-content">
+            <div class="email-content-header pure-g">
+                <div class="pure-u-1-2">
+                    <h1 class="email-content-title">Zset</h1>
+                    <p class="email-content-subtitle">
+                        From <a>DB<font color="red">{{info.db}}</font></a> at <span>{{info.ip}}</span>
+                    </p>
+                </div>
+
+                <div class="email-content-controls pure-u-1-2">
+                    
+                   
+                    <button ng-click="delete(info.key)" class="secondary-button pure-button button-error ">delete</button>
+                </div>
+            </div>
+
+             <div class="email-content-body">
+                <p>
+                    <table class="pure-table pure-table-bordered" >
+                    <!-- <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Make</th>
+
+                        </tr>
+                    </thead> -->
+
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td>
+                                <span ng-if="!info.isEdit">{{info.key}}</span>
+                                <input ng-if="info.isEdit" type="text" ng-model="news.key" placeholder="{{news.key}}">
+                            </td>
+                            <td>
+                                <button ng-click="edit()" ng-if="!info.isEdit" class="button-secondary pure-button">Edit</button>
+                                <button ng-click="sub()" ng-if="info.isEdit" class="button-success pure-button">Submit</button>
+                                <button ng-click="cancel()" ng-if="info.isEdit" class="button-warning pure-button">Cancel</button>
+
+
+
+                                <!-- <img ng-click="edit()" class="imgbut" width="16" height="16" alt="[E]" title="Edit TTL" ng-src="{{info.img}}" > -->
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>type</td>
+                            <td>{{info.type}}</td>
+                            <td> </td>
+
+
+                        </tr>
+                        <tr>
+                            <td>ttl</td>
+                            <td>
+                            <span ng-if="!info.isEditTTL">{{info.ttl}}</span><input ng-if="info.isEditTTL" type="text" ng-model="news.ttl" placeholder="{{news.ttl}}">
+
+                            </td>
+                            <td>
+                                <button ng-click="editTTl()" ng-if="!info.isEditTTL" class="button-secondary pure-button">Edit</button>
+                                <button ng-click="subTTL()" ng-if="info.isEditTTL" class="button-success pure-button">Submit</button>
+                                <button ng-click="cancelTTL()" ng-if="info.isEditTTL" class="button-warning pure-button">Cancel</button>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>size</td>
+                            <td>{{info.size}} items</td>
+                            <td> </td>
+
+                        </tr>
+
+
+                    </tbody>
+                </table>
+                </p>
+                <div class="pure-form margin-bottom-10">
+
+                        <input ng-model="info.query" type="text">
+
+                         <button ng-click="search(-1,info.query)"    class="button-success pure-button">Search</button>
+
+
+
+                </div>
+                <div  class="pure-form">
+
+
+                    <button ng-click="location(-1)" class="button-warning pure-button">Reset</button>
+                    <button ng-click="location(info.it)" class="button-secondary pure-button">Next Scan</button>
+                </div>
+                <p>
+                    <table class="pure-table pure-table-bordered">
+                        <thead>
+                            <tr>
+                           <!--  <th>index</th> -->
+                                <th>score</th>
+                                <th>value</th>
+                                <th>action</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr  ng-repeat="v in info.values | filter:{'value':info.query}">
+                                <!-- <td >{{$index+(info.current-1)*info.limit}}</td> -->
+                                <td >
+                                    <span ng-if="info.values[$index].isEdit">{{v.score}}</span><input ng-if="!info.values[$index].isEdit" type="text" ng-model="info.values[$index].nScore" placeholder="{{info.values[$index].nScore}}">
+
+                                </td>
+                                <td>
+                                    <span ng-if="info.values[$index].isEdit">{{v.value}}</span><input ng-if="!info.values[$index].isEdit" type="text" ng-model="info.values[$index].nValue" placeholder="{{info.values[$index].nValue}}">
+                                </td>
+
+                                <td>
+                                    <button ng-click="editValue($index)" ng-if="info.values[$index].isEdit"  class="button-secondary pure-button">Edit</button>
+                                      <button ng-click="deleteValue($index)" ng-if="info.values[$index].isEdit"  class="button-error pure-button">Delete</button>
+                                     <button ng-click="subValue($index)" ng-if="!info.values[$index].isEdit" class="button-success pure-button">Submit</button>
+                                     <button ng-click="cancelValue($index)" ng-if="!info.values[$index].isEdit" class="button-warning pure-button">Cancel</button>
+                                </td>
+
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </p>
+
+            </div>
+        </div>

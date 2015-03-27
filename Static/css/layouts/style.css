@@ -1,0 +1,65 @@
+
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+.text-alian-left {
+    text-align: left;
+    letter-spacing:normal;
+    display: inline-block;
+}
+.search-box {
+    border: 1px #000 solid;
+    width: 40%;
+}
+.string {
+ background-color: rgb(128, 88, 165);
+}
+.list {
+ background-color: rgb(250, 210, 50);
+}
+.set {
+  background-color: rgb(14, 144, 210);
+}
+.zset {
+  background-color: #5aba59;
+}
+.hash{
+     background-color: #df2d4f;
+
+}
+#main {
+    width: 100%;
+}
+
+
+.button-success, .button-error, .button-warning, .button-secondary {
+   /* border-radius: 4px;*/
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+.button-success {
+    background: none repeat scroll 0 0 rgb(28, 184, 65);
+}
+.button-error {
+    background: none repeat scroll 0 0 rgb(202, 60, 60);
+}
+.button-warning {
+    background: none repeat scroll 0 0 rgb(223, 117, 20);
+}
+.button-secondary {
+    background: none repeat scroll 0 0 rgb(66, 184, 221);
+}
+
+.pure-paginator  li {
+    border: 1px #000 solid;
+    padding: 5px;
+    margin: 0 4px;
+    cursor: pointer;
+}
+.pure-paginator .active {
+    background-color: gray;
+    color: white;
+    cursor: default;
+}
+
+
