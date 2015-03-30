@@ -4,6 +4,7 @@
     <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="the Anthor Simple web interface to manage Redis databases. .">
+<link rel="shortcut icon" href="http://o.tiyee.com.cn/favicon.ico" type="image/x-icon"/>
 
     <title>PHP Redis manage tool. </title>
 
