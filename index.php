@@ -17,7 +17,5 @@ define('DIR_CACHE',ROOT_PATH.'/Cache' );
 
 define('DEBUG',1);
 define('PATH_INFO',2 );
-
-
 require APP_PATH.'/route.php';
 Route::init();
