@@ -11,8 +11,9 @@ namespace Core;
 class base  {
     protected $db = 0;
     public function __construct(){
-      if(!empty($this->request->get('db',1))) {
-        $this->db = $this->request->get('db',1);
+      $db = $this->request->get('db',1);
+      if(!empty($db)) {
+        $this->db = $db;
       }
 
       if(false == $this->redis->select($this->db)) {
@@ -90,17 +91,20 @@ class base  {
     }
     public function renameKey() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('oKey','trim'))) {
+        $oKey = $this->request->post('oKey','trim');
+        if(empty($oKey)) {
             $json['msg'] = 'the old key is empty!!';
             $this->return_json($json);
         } else {
-            $oKey = $this->request->post('oKey','trim');
+            $oKey = $oKey;
         }
-        if(empty($this->request->post('nKey','trim'))) {
+
+        $nKey = $this->request->post('nKey','trim');
+        if(empty($nKey)) {
             $json['msg'] = 'the new key is empty!!';
             $this->return_json($json);
         } else {
-            $nKey = $this->request->post('nKey','trim');
+            $nKey = $nKey;
         }
 
         if(!$this->key_exists($oKey)) {
@@ -125,25 +129,22 @@ class base  {
 
     public function setTimeout() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if($this->request->post('ttl',1) < -1) {
+        $ttl = $this->request->post('ttl',1);
+        if( $ttl < -1) {
             $json['msg'] = 'the new ttl is is unvalid!!';
             $this->return_json($json);
-        } elseif ($this->request->post('ttl',1) == -1) {
+        } elseif ($ttl == -1) {
             //$ttl = -1;
             $this->persist($key,$json);
-        } else {
-            $ttl = $this->request->post('ttl',1);
-
         }
 
         if(false == $this->redis->setTimeout($key,$ttl)) {
