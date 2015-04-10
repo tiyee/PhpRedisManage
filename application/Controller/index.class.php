@@ -67,18 +67,5 @@ class index  extends base {
 			}
 
     }
-    public function add() {
-        $this->redis->delete('zset');
-           for($a=65;$a<=90;$a++)
-            for($b=65;$b<=90;$b++)
-                for($c=65;$c<=90;$c++)
-                    for($d=65;$d<=90;$d++)
-                        for($e=65;$e<=90;$e++)
-                            for($f=65;$f<=90;$f++)
-                                for($g=65;$g<=90;$g++)
-                                    for($h=65;$h<=90;$h++)
-                                        $this->redis->zAdd('zset',$a+1*$b+2*$c+3*$d+4*$e+5*$f+6*$g+7*$h+8*$c+9*$h,chr($a).chr($b).chr($c).chr($d).chr($e).chr($f).chr($g).chr($h));
 
-           echo 'finished';
-    }
 }
