@@ -20,7 +20,7 @@ class index  extends base {
 
     	$this->assign['databases'] = $this->redis->db_num;
 
-    	$this->assign['database'] = empty($this->request->get('db','int'))?0:$this->request->get('db','int');
+    	$this->assign['database'] = $this->request->get('db','int') == 0?0:$this->request->get('db','int');
     	$this->it = $this->getKeysLimit();
     	$this->assign['keys'] = $this->keys;
     	//print_r($this->assign);exit();
