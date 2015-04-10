@@ -14,11 +14,10 @@ class  redis_string extends base {
 
     public function set() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';

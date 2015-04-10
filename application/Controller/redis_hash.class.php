@@ -14,21 +14,20 @@ class  redis_hash extends base {
 
     public function hSet() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if(empty($this->request->post('field','trim'))) {
+
+        $field = $this->request->post('field','trim');
+        if(empty($field)) {
             $json['msg'] = 'the  field is empty!!';
             $this->return_json($json);
-        } else {
-            $field = $this->request->post('field','trim');
         }
         if(!isset($this->request->post['value'])) {
             $json['msg'] = 'the  value is empty!!';
@@ -64,21 +63,21 @@ class  redis_hash extends base {
     }
     public function hSetNx() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
+
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if(empty($this->request->post('field','trim'))) {
+
+        $field = $this->request->post('field','trim');
+        if(empty($field)) {
             $json['msg'] = 'the  field is empty!!';
             $this->return_json($json);
-        } else {
-            $field = $this->request->post('field','trim');
         }
         if(!isset($this->request->post['value'])) {
             $json['msg'] = 'the  value is empty!!';
@@ -102,22 +101,22 @@ class  redis_hash extends base {
 
     public function hDel() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
+
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if(!isset($this->request->post['field'])) {
+        $field = $this->request->post('field','trim');
+        if(empty($field)) {
             $json['msg'] = 'the  field is empty!!';
             $this->return_json($json);
-        } else {
-            $field = $this->request->post('field','trim');
         }
+
         if(false == $this->redis->hDel($key,$field)) {
             $json['msg'] = ' the hash table  or the field doesn\'t exist';
         } else {
@@ -141,8 +140,7 @@ class  redis_hash extends base {
         foreach($values as $field => $value) {
             $info['values'][] = array(
                 'field' => $field,
-                'value' => $value,
-               // 'class' => ($i%2 == 0)?' class="pure-table-odd"':''
+                'value' => $value
                 );
             $i ++;
         }
@@ -151,56 +149,7 @@ class  redis_hash extends base {
         return $this->return_json($info);
 
     }
-    public function redis_zset() {
-        $info = array();
-        $info['exists'] = 1;
-        $info['key'] = $this->getKey();
-        $info['type'] = 'zset';
-        if(false == $this->key_exists($info['key'])) {
-            $info['exists'] = 0;
-        }
-        $info['ttl'] = $this->redis->ttl($info['key']);
-        $arr = $this->redis->zRange($info['key'], 0, -1, TRUE);//zRange('key1', 0, -1, true);
-        foreach($arr as $val => $score) {
-            $info['values'][] = array(
-                'val' =>$val,
-                'score' => $score
 
-                );
-        }
-        //$info['arr'] = $arr;
-        $info['size']   = $this->redis->zCard($info['key']);
-        return $this->return_json($info);
-
-    }
-    public function redis_set() {
-        $info = array();
-        $info['exists'] = 1;
-        $info['key'] = $this->getKey();
-        $info['type'] = 'set';
-        if(false == $this->key_exists($info['key'])) {
-            $info['exists'] = 0;
-        }
-        $info['ttl'] = $this->redis->ttl($info['key']);
-        $info['values'] = $this->redis->sMembers($info['key']);
-
-        $info['size']   = $this->redis->sCard($info['key']);
-        return $this->return_json($info);
-    }
-    public function redis_string() {
-        $info = array();
-        $info['exists'] = 1;
-        $info['key'] = $this->getKey();
-        $info['type'] = 'string';
-        if(false == $this->key_exists($info['key'])) {
-            $info['exists'] = 0;
-        }
-        $info['ttl'] = $this->redis->ttl($info['key']);
-        $info['values'] = $this->redis->get($info['key']);
-
-        $info['size']   = $this->redis->strlen($info['key']);
-        return $this->return_json($info);
-    }
 
 
 }

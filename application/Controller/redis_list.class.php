@@ -29,11 +29,10 @@ class  redis_list extends base {
     }
     public function lSet() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
@@ -78,11 +77,10 @@ class  redis_list extends base {
 
     public function lRem() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';

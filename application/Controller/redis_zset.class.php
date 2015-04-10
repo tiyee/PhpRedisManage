@@ -29,11 +29,10 @@ class  redis_zset extends base {
     }
     public function zSet() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
@@ -45,17 +44,15 @@ class  redis_zset extends base {
         } else {
             $score = $this->request->post('score',1);
         }
-        if(!isset($this->request->post['value'])) {
+        $value = $this->request->post['value'];
+        if(empty($value)) {
             $json['msg'] = 'the  value is empty!!';
             $this->return_json($json);
-        } else {
-            $value = $this->request->post['value'];
         }
-        if(!isset($this->request->post['nValue'])) {
+        $nValue = $this->request->post['nValue'];
+        if(empty($nValue)) {
             $json['msg'] = 'the  nValue is empty!!';
             $this->return_json($json);
-        } else {
-            $nValue = $this->request->post['nValue'];
         }
         $this->redis->zDelete($key, $value);
 
@@ -86,21 +83,19 @@ class  redis_zset extends base {
 
     public function zRem() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if(empty($this->request->post['value'])) {
-            $json['msg'] = 'the value is empty!!';
+        $value = $this->request->post['value'];
+        if(empty($value)) {
+            $json['msg'] = 'the  value is empty!!';
             $this->return_json($json);
-        } else {
-            $value = $this->request->post('value','trim');
         }
 
 

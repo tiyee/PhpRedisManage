@@ -14,11 +14,10 @@ class  redis_set extends base {
 
     public function sReset() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+       $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
@@ -67,21 +66,19 @@ class  redis_set extends base {
     }
     public function sRem() {
         $json = array('error' => 1,'msg'=>'error');
-        if(empty($this->request->post('key','trim'))) {
+        $key = $this->request->post('key','trim');
+        if(empty($key)) {
             $json['msg'] = 'the  key is empty!!';
             $this->return_json($json);
-        } else {
-            $key = $this->request->post('key','trim');
         }
         if(!$this->key_exists($key)) {
              $json['msg'] = 'the  key is not exists!!';
              $this->return_json($json);
         }
-        if(empty($this->request->post['value'])) {
+        $value = $this->request->post('value','trim');
+        if(empty($value)) {
             $json['msg'] = 'the value is empty!!';
             $this->return_json($json);
-        } else {
-            $value = $this->request->post('value','trim');
         }
 
 
@@ -125,7 +122,8 @@ class  redis_set extends base {
 
     }
     public function search() {
-         $pattern = empty($this->request->post('keyword','trim'))?'':$this->request->post('keyword','trim');
+        $keyword = $this->request->post('keyword','trim');
+         $pattern = empty($keyword)?'':$keyword;
         $info = array();
         $info['exists'] = 1;
         $info['key'] = $this->getKey();

@@ -19,14 +19,15 @@ class index  extends base {
 
 
     	$this->assign['databases'] = $this->redis->db_num;
-
-    	$this->assign['database'] = $this->request->get('db','int') == 0?0:$this->request->get('db','int');
+        $database = $this->request->get('db','int');
+    	$this->assign['database'] =  empty($database)?0:$database;
     	$this->it = $this->getKeysLimit();
     	$this->assign['keys'] = $this->keys;
     	//print_r($this->assign);exit();
     	$this->display('index');
     }
     public function json_keyLimit() {
+
     	$it = empty($this->request->get['it'])?null:$this->request->get('it',1);
 
     	$json = array();
