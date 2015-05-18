@@ -8,7 +8,7 @@
 
 namespace Config;
 interface redis {
-const RE_HOST = '127.0.0.1';
+const RE_HOST = '123.59.40.96';
 /*const RE_USER = 'xxxxxx';
 const RE_PASS = 'xxxxxx';*/
 const RE_AUTH = '';//$user . ":" . $pwd
